@@ -1,4 +1,4 @@
-extends Area2D
+extends RigidBody2D
 class_name EnemyBase
 
 var _target : KinematicBody2D
@@ -15,7 +15,7 @@ var _scores : int
 
 func _ready() -> void:
 	_life = (randi() % 4 + 1)
-	_scores = _life
+	_scores = (_life * (_life+1)/2)
 	_life_show()
 
 func set_target(target: KinematicBody2D) -> void:

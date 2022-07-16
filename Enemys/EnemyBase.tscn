@@ -5,7 +5,8 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[node name="EnemyBase" type="Area2D" groups=["Enemy"]]
+[node name="EnemyBase" type="RigidBody2D" groups=["Enemy"]]
+gravity_scale = 0.0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
