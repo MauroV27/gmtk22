@@ -6,6 +6,7 @@ onready var _player : KinematicBody2D = get_node("Player")
 
 
 func _ready() -> void:
+	Global.set_total_scores(0) # reset scores
 	randomize()
 	
 	get_node("Enemys").set_target(_player)

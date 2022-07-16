@@ -16,6 +16,9 @@ var _life : int = 12
 signal create_bullet()
 
 func _ready() -> void:
+	hud.update_life(_life)
+	hud.update_scores(scores)
+	
 	_reload_gun()
 
 func _input(event: InputEvent) -> void:
@@ -56,7 +59,8 @@ func _rotate_player() -> void:
 func _update_life(value:int) -> void:
 	_life += value
 	if _life <= 0 :
-		get_tree().change_scene("res://UI/Menu.tscn")
+		Global.set_total_scores(scores)
+		get_tree().change_scene("res://UI/EndScreen.tscn")
 	else :
 		hud.update_life(_life)
 
