@@ -16,7 +16,6 @@ var scores : int = 0
 var _life : int = 12
 
 signal create_bullet()
-signal shooting_sfx()
 
 func _ready() -> void:
 	hud.update_life(_life)
@@ -28,7 +27,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click") and _can_shoot :
 		if _bullets > 0:
 			create_bullet()
-			emit_signal("shooting_sfx")
+			$Shooting.play()
 			_bullets -= 1
 			hud.update_bullets(_bullets)
 			
