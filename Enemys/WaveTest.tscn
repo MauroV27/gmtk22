@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Enemys/Wave.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemys/Types/EnemyType1.tscn" type="PackedScene" id=2]
+
+[node name="WaveTest" instance=ExtResource( 1 )]
+
+[node name="EnemyType1" parent="Stages/Stage 1" index="0" instance=ExtResource( 2 )]
+
+[node name="EnemyType2" parent="Stages/Stage 1" index="1" instance=ExtResource( 2 )]
+
+[node name="EnemyType3" parent="Stages/Stage 1" index="2" instance=ExtResource( 2 )]
+
+[node name="EnemyType4" parent="Stages/Stage 1" index="3" instance=ExtResource( 2 )]
+
+[node name="EnemyType5" parent="Stages/Stage 1" index="4" instance=ExtResource( 2 )]
+
+[node name="EnemyType6" parent="Stages/Stage 1" index="5" instance=ExtResource( 2 )]
+
+[node name="Stage 2" type="Node" parent="Stages" index="1"]
+
+[node name="EnemyType7" parent="Stages/Stage 2" index="0" instance=ExtResource( 2 )]
+
+[node name="EnemyType8" parent="Stages/Stage 2" index="1" instance=ExtResource( 2 )]
+
+[node name="EnemyType9" parent="Stages/Stage 2" index="2" instance=ExtResource( 2 )]
+
+[node name="EnemyType10" parent="Stages/Stage 2" index="3" instance=ExtResource( 2 )]
+
+[node name="EnemyType11" parent="Stages/Stage 2" index="4" instance=ExtResource( 2 )]
+
+[node name="EnemyType12" parent="Stages/Stage 2" index="5" instance=ExtResource( 2 )]
+
+[node name="Stage 3" type="Node" parent="Stages" index="2"]
+
+[node name="EnemyType13" parent="Stages/Stage 3" index="0" instance=ExtResource( 2 )]
+
+[node name="EnemyType14" parent="Stages/Stage 3" index="1" instance=ExtResource( 2 )]
+
+[node name="EnemyType15" parent="Stages/Stage 3" index="2" instance=ExtResource( 2 )]
+
+[node name="EnemyType16" parent="Stages/Stage 3" index="3" instance=ExtResource( 2 )]
+
+[node name="EnemyType17" parent="Stages/Stage 3" index="4" instance=ExtResource( 2 )]
+
+[node name="EnemyType18" parent="Stages/Stage 3" index="5" instance=ExtResource( 2 )]
