@@ -16,5 +16,5 @@ func _process(delta):
 	pass
 
 func _on_Player_shooting_sfx():
-	print("test")
+#	print("test")
 	$Shooting.play()
