@@ -9,8 +9,7 @@ func _ready() -> void:
 	Global.set_total_scores(0) # reset scores
 	randomize()
 	
-	get_node("Enemys").set_target(_player)
-	get_node("Enemys").start_spawn()
+	$Waves.get_child(0).start_wave(_player)
 
 
 func _on_Player_create_bullet(_angle:float, _type:int) -> void:

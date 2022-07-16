@@ -34,7 +34,7 @@ func get_enemy_type_id() -> int:
 	return _type_id
 
 func _physics_process(delta: float) -> void:
-	if _is_active:
+	if _is_active && _target != null:
 		var _direction = global_position.direction_to(_target.global_position)
 		rotation = (PI + _direction.angle()) 
 		position += _direction * _move_speed * delta

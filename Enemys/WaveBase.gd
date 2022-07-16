@@ -24,14 +24,11 @@ func _process(_delta: float) -> void:
 			queue_free()
 
 
-func start_wave():
-	start_stage()
-
-
-func set_target(target: KinematicBody2D):
+func start_wave(target: KinematicBody2D):
 	for i in stages:
 		for j in i.get_children():
 			j._target = target
+	start_stage()
 
 
 func start_stage():
