@@ -16,6 +16,6 @@ func _ready() -> void:
 func _on_Player_create_bullet(_angle:float, _type:int) -> void:
 	var _bullet = BULLET.instance()
 	_bullet.set_type(_type)
-	_bullet.set_direction(_angle, _player.global_position)
+	_bullet.set_direction(_angle, _player.get_node("Sprite2").get_node("Tip").global_position)
 	
 	add_child(_bullet)
