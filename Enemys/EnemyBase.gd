@@ -10,13 +10,11 @@ var _target : KinematicBody2D
 var _life : int
 var _type_id : int
 var _scores : int
+var _is_active := true
 
 signal destroy()
 
-func _ready() -> void:
-	var sound_controller = get_parent().get_node("Sound Controller")
-	self.connect("destroy", sound_controller, "_on_Enemy_destroy")
-	
+func _ready() -> void:	
 	_life = _max_life
 	_scores = (_life * (_life+1)/2)
 	_life_show()
@@ -36,21 +34,30 @@ func get_enemy_type_id() -> int:
 	return _type_id
 
 func _physics_process(delta: float) -> void:
-	var _direction = global_position.direction_to(_target.global_position)
-	rotation = (PI + _direction.angle()) 
-	position += _direction * _move_speed * delta
+	if _is_active:
+		var _direction = global_position.direction_to(_target.global_position)
+		rotation = (PI + _direction.angle()) 
+		position += _direction * _move_speed * delta
 
 
 func _life_show() -> void:
 	get_node("Sprite").region_rect = Rect2((_life-1) * 16, 0, 16, 16)
 
 
+func activate():
+	_is_active = true
+
+
 func receive_damage(damage_value:int) -> void:
 	_life -= damage_value
 	if _life <= 0:
 		emit_signal("destroy")
+		$Destroy.play()
+		$CollisionShape2D.disabled = true
+		visible = false
 		if _target.has_method("update_scores"):
 			_target.update_scores(_scores)
+		yield($Destroy, "finished")
 		queue_free()
 	else:
 		_move_speed += _increase_speed
