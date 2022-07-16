@@ -14,10 +14,7 @@ var _is_active := true
 
 signal destroy()
 
-func _ready() -> void:
-	var sound_controller = get_parent().get_node("Sound Controller")
-	self.connect("destroy", sound_controller, "_on_Enemy_destroy")
-	
+func _ready() -> void:	
 	_life = _max_life
 	_scores = (_life * (_life+1)/2)
 	_life_show()
