@@ -8,12 +8,16 @@ var _life : int
 var _type_id : int
 var _scores : int
 
+signal destroy()
+
 #var _animate_time : float = 0
 #var _animate_dir : int = 1
 #var _animate_speed : int = 8
 
 
 func _ready() -> void:
+	var sound_controller = get_parent().get_node("Sound Controller")
+	self.connect("destroy", sound_controller, "_on_Enemy_destroy")
 	_life = (randi() % 4 + 1)
 	_scores = (_life * (_life+1)/2)
 	_life_show()
@@ -40,6 +44,7 @@ func _life_show() -> void:
 func receive_damage(damage_value:int) -> void:
 	_life -= damage_value
 	if _life <= 0:
+		emit_signal("destroy")
 		if _target.has_method("update_scores"):
 			_target.update_scores(_scores)
 		queue_free()
