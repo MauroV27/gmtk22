@@ -6,6 +6,7 @@ var _target : KinematicBody2D
 var _move_speed : float = 45.0
 var _life : int
 var _type_id : int
+var _scores : int
 
 #var _animate_time : float = 0
 #var _animate_dir : int = 1
@@ -14,6 +15,7 @@ var _type_id : int
 
 func _ready() -> void:
 	_life = (randi() % 4 + 1)
+	_scores = _life
 	_life_show()
 
 func set_target(target: KinematicBody2D) -> void:
@@ -38,8 +40,11 @@ func _life_show() -> void:
 func receive_damage(damage_value:int) -> void:
 	_life -= damage_value
 	if _life <= 0:
+		if _target.has_method("update_scores"):
+			_target.update_scores(_scores)
 		queue_free()
 	else:
+		_move_speed += 5
 		_life_show()
 
 #func _process(delta: float) -> void:

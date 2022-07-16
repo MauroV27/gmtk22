@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var timer = $TimerToShoot
+onready var hud = $PlayerHUD
 
 const SPEED: int = 80
 
@@ -8,6 +9,7 @@ var _motion : Vector2 = Vector2.ZERO
 var _can_shoot : bool = true
 var _bullets : int = 0
 var _bullet_type : int 
+var scores : int = 0
 
 signal create_bullet()
 
@@ -18,6 +20,9 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click") and _can_shoot :
 		if _bullets > 0:
 			create_bullet()
+			_bullets -= 1
+			hud.update_bullets(_bullets)
+			
 			_can_shoot = false
 			timer.start()
 		else:
@@ -46,11 +51,18 @@ func _rotate_player() -> void:
 	rotation =_mouse_angle
 
 
+func update_scores(value:int) -> void:
+	scores += value
+	hud.update_scores(scores)
+
+
 func _reload_gun() -> void:
 	_bullets = randi() % 4 + 4
 	
 	_bullet_type = randi() % Global.object_types.size()
 	get_node("BulletTypePreview").modulate = Global.object_types[_bullet_type][1]
+	
+	hud.update_bullets(_bullets)
 
 func create_bullet() -> void:
 	emit_signal("create_bullet", rotation, _bullet_type)
