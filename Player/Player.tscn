@@ -6,8 +6,10 @@
 [ext_resource path="res://Player/PlayerHUD.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id=2]
+radius = 12.0
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -39,3 +41,4 @@ shape = SubResource( 2 )
 [node name="Timer" type="Timer" parent="HitBox"]
 
 [connection signal="timeout" from="TimerToShoot" to="." method="_on_TimerToShoot_timeout"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_HitBox_body_entered"]

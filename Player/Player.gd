@@ -9,7 +9,9 @@ var _motion : Vector2 = Vector2.ZERO
 var _can_shoot : bool = true
 var _bullets : int = 0
 var _bullet_type : int 
+
 var scores : int = 0
+var _life : int = 12
 
 signal create_bullet()
 
@@ -51,6 +53,14 @@ func _rotate_player() -> void:
 	rotation =_mouse_angle
 
 
+func _update_life(value:int) -> void:
+	_life += value
+	if _life <= 0 :
+		get_tree().change_scene("res://UI/Menu.tscn")
+	else :
+		hud.update_life(_life)
+
+
 func update_scores(value:int) -> void:
 	scores += value
 	hud.update_scores(scores)
@@ -71,3 +81,8 @@ func create_bullet() -> void:
 func _on_TimerToShoot_timeout() -> void:
 	timer.stop()
 	_can_shoot = true
+
+
+func _on_HitBox_body_entered(body: Node) -> void:
+	if body.is_in_group("Enemy") :
+		_update_life(-1)
