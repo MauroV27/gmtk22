@@ -16,5 +16,5 @@ func _process(delta):
 	pass
 	
 func _on_Enemy_destroy():
-	print("Destroi")
+#	print("Destroi")
 	$Destroy.play()

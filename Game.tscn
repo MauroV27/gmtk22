@@ -39,6 +39,5 @@ stream = ExtResource( 7 )
 volume_db = -10.487
 
 [connection signal="create_bullet" from="Player" to="." method="_on_Player_create_bullet"]
-[connection signal="create_bullet" from="Player" to="Player/Sound Controller" method="_on_Player_create_bullet"]
 [connection signal="shooting_sfx" from="Player" to="Player/Sound Controller" method="_on_Player_shooting_sfx"]
 [connection signal="timeout" from="Enemys/Timer" to="Enemys" method="_on_Timer_timeout"]
