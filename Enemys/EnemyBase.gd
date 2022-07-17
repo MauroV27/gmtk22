@@ -27,7 +27,7 @@ func set_target(target: KinematicBody2D) -> void:
 func set_enemy(_pos: Vector2, _id : int, _color: Color ) -> void:
 	position = _pos
 	_type_id = _id
-	get_node("EnemyBackground").modulate = _color
+	get_node("Sprite").modulate = _color
 
 
 func get_enemy_type_id() -> int:
@@ -36,12 +36,12 @@ func get_enemy_type_id() -> int:
 func _physics_process(delta: float) -> void:
 	if _is_active:
 		var _direction = global_position.direction_to(_target.global_position)
-		rotation = (PI + _direction.angle()) 
+#		rotation = (PI + _direction.angle()) 
 		position += _direction * _move_speed * delta
 
 
 func _life_show() -> void:
-	get_node("Sprite").region_rect = Rect2((_life-1) * 16, 0, 16, 16)
+	get_node("Sprite").region_rect = Rect2((_life-1) * 24, 0, 24, 24)
 
 
 func activate():
@@ -53,7 +53,7 @@ func receive_damage(damage_value:int) -> void:
 	if _life <= 0:
 		emit_signal("destroy")
 		$Destroy.play()
-		$CollisionShape2D.disabled = true
+		$CollisionShape2D.set_deferred("disabled", true)
 		visible = false
 		if _target.has_method("update_scores"):
 			_target.update_scores(_scores)

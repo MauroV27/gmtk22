@@ -116,7 +116,7 @@ texture = ExtResource( 6 )
 region_enabled = true
 region_rect = Rect2( 96, 32, 32, 32 )
 
-[node name="Tip" type="StaticBody2D" parent="Sprite2"]
+[node name="Tip" type="Position2D" parent="Sprite2"]
 position = Vector2( -11.4286, -11.4286 )
 
 [node name="BulletTypePreview" type="Sprite" parent="."]
