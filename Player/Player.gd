@@ -24,6 +24,7 @@ func _ready() -> void:
 	_reload_gun()
 
 func _input(event: InputEvent) -> void:
+	
 	if event.is_action_pressed("click") and _can_shoot :
 		if _bullets > 0:
 			create_bullet()
@@ -46,17 +47,30 @@ func _physics_process(delta: float) -> void:
 
 
 func _move() -> Vector2:
+	var hor_input = Input.get_action_strength("right")-Input.get_action_strength("left")
+	var ver_input = Input.get_action_strength("down")-Input.get_action_strength("up")
 	var _dir = Vector2(
-		Input.get_action_strength("right")-Input.get_action_strength("left"),
-		Input.get_action_strength("down")-Input.get_action_strength("up")
+		hor_input,
+		ver_input
 	)
-		
+	
+	if _dir.x == -1:
+		get_node("AnimationPlayer").current_animation = "left"
+	elif _dir.x == 1:
+		get_node("AnimationPlayer").current_animation = "right"
+	elif _dir.y == -1:
+		get_node("AnimationPlayer").current_animation = "up"
+	elif _dir.y == 1:
+		get_node("AnimationPlayer").current_animation = "down"
+	else:
+		get_node("AnimationPlayer").current_animation = "idle"
 	return _dir.normalized()
 
 
 func _rotate_player() -> void:
 	var _mouse_angle : float = global_position.direction_to(get_global_mouse_position()).angle()
-	rotation =_mouse_angle
+	
+	get_node("Sprite2").rotation =_mouse_angle+2.2
 
 
 func _update_life(value:int) -> void:
@@ -82,7 +96,7 @@ func _reload_gun() -> void:
 	hud.update_bullets(_bullets)
 
 func create_bullet() -> void:
-	emit_signal("create_bullet", rotation, _bullet_type)
+	emit_signal("create_bullet", get_node("Sprite2").rotation+4, _bullet_type)
 
 
 func _on_TimerToShoot_timeout() -> void:
