@@ -10,7 +10,7 @@ func _ready() -> void:
 	randomize()
 	
 	get_node("Enemys").set_target(_player)
-	get_node("Enemys").start_spawn()
+#	get_node("Enemys").start_spawn()
 
 
 func _on_Player_create_bullet(_angle:float, _type:int) -> void:
