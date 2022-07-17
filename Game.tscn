@@ -1,8 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://GameController.gd" type="Script" id=2]
 [ext_resource path="res://Enemys/EnemySimpleSpawner.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 320, 10 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 170 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
@@ -16,5 +22,25 @@ position = Vector2( 320, 180 )
 [node name="Bullets" type="Node2D" parent="."]
 
 [node name="Enemys" parent="." instance=ExtResource( 3 )]
+
+[node name="WorldLimit" type="Node2D" parent="."]
+
+[node name="Wall" type="StaticBody2D" parent="WorldLimit"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldLimit/Wall"]
+position = Vector2( 320, 0 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WorldLimit/Wall"]
+position = Vector2( 320, 360 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="WorldLimit/Wall"]
+position = Vector2( 0, 180 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="WorldLimit/Wall"]
+position = Vector2( 640, 180 )
+shape = SubResource( 2 )
 
 [connection signal="create_bullet" from="Player" to="." method="_on_Player_create_bullet"]

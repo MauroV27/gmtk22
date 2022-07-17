@@ -7,6 +7,8 @@ const ENEMY_4 = preload("res://Enemys/Types/EnemyType4.tscn")
 
 onready var timer : Timer = $Timer
 
+export var wait_time : float = 3.0
+
 var _spanw_positions : Array
 var _target : KinematicBody2D
 
@@ -46,6 +48,7 @@ func _create_enemy() -> void:
 	get_node("Enemys").add_child(_enemy)
 	
 	timer.start()
+	timer.wait_time = wait_time
 
 func _on_Timer_timeout() -> void:
 	timer.stop()
