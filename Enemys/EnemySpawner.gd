@@ -24,21 +24,17 @@ func create_enemy() -> void:
 	match _type:
 		0:
 			_enemy = ENEMY.instance()
-			_color = Global.object_types[0][1]
 		1:
 			_enemy = ENEMY_2.instance()
-			_color = Global.object_types[1][1]
 		2:
 			_enemy = ENEMY_3.instance()
-			_color = Global.object_types[2][1]
 		3:
 			_enemy = ENEMY_4.instance()
-			_color = Global.object_types[3][1]
 	
 	var _pos : Vector2 = Vector2( rand_range(-400, 400), rand_range(-200, 200) )
 	
 	_enemy.set_target(_player_target_ref)
-	_enemy.set_enemy(_pos, _type, _color)
+	_enemy.set_enemy(_pos, _type)
 	
 	add_child(_enemy)
 

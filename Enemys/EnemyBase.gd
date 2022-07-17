@@ -14,7 +14,7 @@ var _is_active := true
 
 signal destroy()
 
-func _ready() -> void:	
+func _ready() -> void:
 	_life = _max_life
 	_scores = (_life * (_life+1)/2)
 	_life_show()
@@ -24,10 +24,11 @@ func set_target(target: KinematicBody2D) -> void:
 	_target = target
 
 
-func set_enemy(_pos: Vector2, _id : int, _color: Color ) -> void:
+func set_enemy(_pos: Vector2, _id : int ) -> void:
+	# used in spawner test [DEPRECATED FOR WAVE SYSTEM]
 	position = _pos
 	_type_id = _id
-	get_node("Sprite").modulate = _color
+	get_node("Sprite").modulate = Global.object_types[_type_id][1]
 
 
 func get_enemy_type_id() -> int:

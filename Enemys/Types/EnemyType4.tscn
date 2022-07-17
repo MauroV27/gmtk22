@@ -5,8 +5,11 @@
 
 [node name="EnemyType4" instance=ExtResource( 2 )]
 _max_life = 12
+_move_speed = 30.0
+_increase_speed = 2.0
 
 [node name="Sprite" type="Sprite" parent="." index="2"]
+modulate = Color( 1, 1, 0, 1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 24, 24 )
