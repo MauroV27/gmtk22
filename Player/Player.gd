@@ -12,6 +12,12 @@ var _bullets : int = 0
 var _bullet_type : int 
 var _is_vunerable : bool = true
 
+# Implement a stack estructury for control bullets 
+# id of objetcts
+var _bullet_stack = [
+	0, 1, 2
+]
+
 var scores : int = 0
 var _life : int = 12
 
@@ -30,7 +36,7 @@ func _input(event: InputEvent) -> void:
 			create_bullet()
 			$Shooting.play()
 			_bullets -= 1
-			hud.update_bullets(_bullets)
+			hud.update_bullets(_bullets, _bullet_type, _bullet_stack)
 			
 			_can_shoot = false
 			timer.start()
@@ -88,12 +94,25 @@ func update_scores(value:int) -> void:
 
 
 func _reload_gun() -> void:
-	_bullets = randi() % 4 + 4
+	_bullets = randi() % 6 + 4
 	
-	_bullet_type = randi() % Global.object_types.size()
+	_bullet_type = _bullet_stack[0]
+	_change_bullet_stack()
 	get_node("BulletTypePreview").modulate = Global.object_types[_bullet_type][1]
 	
-	hud.update_bullets(_bullets)
+	hud.update_bullets(_bullets, _bullet_type, _bullet_stack)
+
+
+func _change_bullet_stack() -> void:
+	var _temp_stack = [0, 1, 2]
+	
+	_temp_stack[0] = _bullet_stack[1]
+	_temp_stack[1] = _bullet_stack[2]
+	
+	_temp_stack[2] = randi() % Global.object_types.size() 
+	
+	_bullet_stack = _temp_stack
+
 
 func create_bullet() -> void:
 	emit_signal("create_bullet", get_node("Sprite2").rotation+4, _bullet_type)
