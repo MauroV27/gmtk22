@@ -52,7 +52,7 @@ func receive_damage(damage_value:int) -> void:
 	_life -= damage_value
 	if _life <= 0:
 		$Destroy.play()
-		$CollisionShape2D.set_deferred("disabled", true)
+		$CollisionShape2D.disabled = true
 		visible = false
 		if _target.has_method("update_scores"):
 			_target.update_scores(_scores)
