@@ -19,7 +19,7 @@ var _bullet_stack = [
 ]
 
 var scores : int = 0
-var _life : int = 12
+var _life : int = 5
 
 signal create_bullet()
 
@@ -27,7 +27,7 @@ func _ready() -> void:
 	hud.update_life(_life)
 	hud.update_scores(scores)
 	
-	_reload_gun()
+	_reload_gun(false)
 
 func _input(event: InputEvent) -> void:
 	
@@ -93,7 +93,10 @@ func update_scores(value:int) -> void:
 	hud.update_scores(scores)
 
 
-func _reload_gun() -> void:
+func _reload_gun(play_sound:bool = true) -> void:
+	if play_sound:
+		$ReloadShoot.play()
+		
 	_bullets = randi() % 6 + 4
 	
 	_bullet_type = _bullet_stack[0]
@@ -128,8 +131,12 @@ func _on_HitBox_body_entered(body: Node) -> void:
 		_update_life(-1)
 		
 		_is_vunerable = false
+		set_collision_layer_bit(1, false)
+		$Sprite.modulate = Color(1, 0.3, 0.3)
 		vunerable_time.start()
 
 func _on_TimerInvunerable_timeout() -> void:
 	_is_vunerable = true
+	$Sprite.modulate = Color(1, 1, 1)
+	set_collision_layer_bit(1, true)
 	vunerable_time.stop()

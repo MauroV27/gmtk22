@@ -26,6 +26,8 @@ position = Vector2( 320, 180 )
 [node name="WorldLimit" type="Node2D" parent="."]
 
 [node name="Wall" type="StaticBody2D" parent="WorldLimit"]
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldLimit/Wall"]
 position = Vector2( 320, 0 )
