@@ -19,7 +19,7 @@ var _bullet_stack = [
 ]
 
 var scores : int = 0
-var _life : int = 5
+var _life : int = 3
 
 signal create_bullet()
 

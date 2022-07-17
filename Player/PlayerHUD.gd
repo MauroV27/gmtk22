@@ -5,7 +5,7 @@ onready var label_scores = $Control/Scores
 onready var label_bullets = $Control/BulletManager/Square1/Bullets
 
 func update_life(life:int) -> void:
-	label_life.text = "life: " + str(life)
+	label_life.text = str(life)
 
 
 func update_scores(scores:int) -> void:

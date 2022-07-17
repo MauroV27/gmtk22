@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/FreePixel.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://UI/EndScreen.gd" type="Script" id=2]
+[ext_resource path="res://Assets/gmtk - wooden floor 2.png" type="Texture" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -32,13 +33,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.643137, 0.643137, 0.643137, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
 
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5
