@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 onready var timer = $TimerToShoot
+onready var vunerable_time = $TimerInvunerable
 onready var hud = $PlayerHUD
 
 const SPEED: int = 80
@@ -9,12 +10,12 @@ var _motion : Vector2 = Vector2.ZERO
 var _can_shoot : bool = true
 var _bullets : int = 0
 var _bullet_type : int 
+var _is_vunerable : bool = true
 
 var scores : int = 0
 var _life : int = 12
 
 signal create_bullet()
-signal shooting_sfx()
 
 func _ready() -> void:
 	hud.update_life(_life)
@@ -27,7 +28,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click") and _can_shoot :
 		if _bullets > 0:
 			create_bullet()
-			emit_signal("shooting_sfx")
+			$Shooting.play()
 			_bullets -= 1
 			hud.update_bullets(_bullets)
 			
@@ -104,5 +105,12 @@ func _on_TimerToShoot_timeout() -> void:
 
 
 func _on_HitBox_body_entered(body: Node) -> void:
-	if body.is_in_group("Enemy") :
+	if body.is_in_group("Enemy") and _is_vunerable:
 		_update_life(-1)
+		
+		_is_vunerable = false
+		vunerable_time.start()
+
+func _on_TimerInvunerable_timeout() -> void:
+	_is_vunerable = true
+	vunerable_time.stop()
