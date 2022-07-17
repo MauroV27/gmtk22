@@ -34,7 +34,7 @@ func get_enemy_type_id() -> int:
 	return _type_id
 
 func _physics_process(delta: float) -> void:
-	if _is_active && _target != null:
+	if _is_active:
 		var _direction = global_position.direction_to(_target.global_position)
 		rotation = (PI + _direction.angle()) 
 		position += _direction * _move_speed * delta
@@ -52,8 +52,7 @@ func receive_damage(damage_value:int) -> void:
 	_life -= damage_value
 	if _life <= 0:
 		$Destroy.play()
-		$CollisionShape2D.disabled = true
-		set_collision_layer_bit(2, false)
+		$CollisionShape2D.set_deferred("disabled", true)
 		visible = false
 		if _target.has_method("update_scores"):
 			_target.update_scores(_scores)
