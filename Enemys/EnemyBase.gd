@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends KinematicBody2D
 class_name EnemyBase
 
 export var _max_life : int = 5
@@ -51,9 +51,9 @@ func activate():
 func receive_damage(damage_value:int) -> void:
 	_life -= damage_value
 	if _life <= 0:
-		emit_signal("destroy")
 		$Destroy.play()
 		$CollisionShape2D.disabled = true
+		set_collision_layer_bit(2, false)
 		visible = false
 		if _target.has_method("update_scores"):
 			_target.update_scores(_scores)
